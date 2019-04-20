@@ -12,7 +12,7 @@ export class HeroesComponent implements OnInit {
   // heroes = HEROES;
   heroes: Hero[];
    //Initialized object of class Hero.
-  selectedHero: Hero;
+  // selectedHero: Hero;
 
   constructor(private heroService: HeroService) { }
 
@@ -22,13 +22,17 @@ export class HeroesComponent implements OnInit {
   // method(veriable: class): return type {}
   // Basic getter/setter function 
   // but here combined with click event using OnSelect method.
-  onSelect(hero : Hero): void{
-    this.selectedHero = hero;
-  }
+  // onSelect(hero : Hero): void{
+  //   this.selectedHero = hero;
+  // }
 
   getHeroes(): void {
     this.heroService.getHeroes()
         .subscribe(heroes => this.heroes = heroes);
   }
 
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
 }
